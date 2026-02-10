@@ -689,6 +689,31 @@ img {
   display: block;
 }
 
+.project-modal-fullscreen {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: opacity var(--transition), background var(--transition);
+}
+
+.project-modal-fullscreen:hover {
+  background: rgba(245, 158, 11, 0.8);
+  color: var(--bg);
+}
+
 .project-modal-prev,
 .project-modal-next {
   position: absolute;
@@ -815,6 +840,165 @@ img {
 
 .project-modal-links .btn {
   text-decoration: none;
+}
+
+/* ===== Visualizador em tela cheia ===== */
+.fullscreen-viewer {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(0, 0, 0, 0.95);
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen-viewer.active {
+  display: flex;
+}
+
+.fullscreen-viewer:fullscreen,
+.fullscreen-viewer:-webkit-full-screen,
+.fullscreen-viewer:-moz-full-screen {
+  background: var(--bg);
+}
+
+.fullscreen-viewer-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  min-height: 0;
+}
+
+.fullscreen-viewer-img {
+  max-width: 95vw;
+  max-height: 70vh;
+  object-fit: contain;
+}
+
+.fullscreen-viewer-thumbs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.fullscreen-viewer-thumbs.hidden {
+  display: none;
+}
+
+.fullscreen-viewer-thumbs .thumb {
+  width: 64px;
+  height: 48px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  background: var(--surface);
+  flex-shrink: 0;
+  transition: opacity var(--transition), border-color var(--transition), filter var(--transition);
+  opacity: 0.5;
+  filter: brightness(0.7);
+}
+
+.fullscreen-viewer-thumbs .thumb:hover {
+  opacity: 0.85;
+  filter: brightness(0.9);
+}
+
+.fullscreen-viewer-thumbs .thumb.active {
+  opacity: 1;
+  filter: brightness(1);
+  border-color: var(--accent);
+}
+
+.fullscreen-viewer-thumbs .thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fullscreen-viewer-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.fullscreen-viewer-close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.fullscreen-viewer-main .fullscreen-viewer-prev,
+.fullscreen-viewer-main .fullscreen-viewer-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: opacity var(--transition), background var(--transition);
+}
+
+.fullscreen-viewer-main .fullscreen-viewer-prev {
+  left: 1rem;
+}
+
+.fullscreen-viewer-main .fullscreen-viewer-next {
+  right: 1rem;
+}
+
+.fullscreen-viewer-main .fullscreen-viewer-prev:hover,
+.fullscreen-viewer-main .fullscreen-viewer-next:hover {
+  background: rgba(245, 158, 11, 0.8);
+  color: var(--bg);
+}
+
+.fullscreen-viewer.single .fullscreen-viewer-prev,
+.fullscreen-viewer.single .fullscreen-viewer-next {
+  display: none;
+}
+
+.fullscreen-viewer.single .fullscreen-viewer-thumbs {
+  display: none;
+}
+
+/* Esconder botão fullscreen quando só há 1 imagem (opcional, ou manter para ampliar) */
+.project-modal-gallery.single .project-modal-fullscreen {
+  display: flex;
 }
 
 /* ===== Contato ===== */
